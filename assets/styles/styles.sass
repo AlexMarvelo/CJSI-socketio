@@ -1,0 +1,133 @@
+$containerWidth: 750px
+$textColor: #dce8ff
+$formTextColor: white
+$borderColor: #dce8ff
+$insideMsgBkgrnd: rgba(72, 102, 136, 0.82)
+
+div
+  box-sizing: border-box
+body
+  margin: 0
+  padding: 0
+  font-size: 15px
+  font-family: Helvetica, arial, sans-serif
+  font-weight: 300
+ul
+  margin: 0
+  padding: 0
+  list-style: none
+\::-webkit-input-placeholder
+  color: inherit
+\::-moz-placeholder
+  color: inherit
+\:-moz-placeholder
+  color: inherit
+\:-ms-input-placeholder
+  color: inherit
+
+
+.wrapper
+  position: fixed
+  width: 100%
+  height: 100%
+  background: rgba(158,158,158,.18) url('../img/blurred-background-2.jpg') no-repeat center
+  background-size: cover
+  padding-bottom: 50px
+
+.messages
+  &-container
+    width: 100%
+    padding: 25px 25px 0
+    max-width: $containerWidth
+    margin: 0 auto
+    height: 100%
+    overflow: scroll
+
+.message
+  position: relative
+  margin-bottom: 15px
+  &-imgContainer
+    width: 50px
+    height: 50px
+    border-radius: 7px
+    overflow: hidden
+    position: absolute
+    top: 0
+    > img
+      width: 100%
+  &-content
+    border: 1px solid $borderColor
+    border-radius: 4px
+    padding: 10px
+    color: $textColor
+    overflow: hidden
+    &-user
+      font-size: 16px
+    &-text
+      margin: 0
+      line-height: 1.4
+      margin-top: 6px
+  &--outside
+    padding-left: 75px
+    padding-right: 20px
+    .message-imgContainer
+      left: 10px
+  &--inside
+    padding-right: 75px
+    padding-left: 20px
+    .message-imgContainer
+      right: 10px
+    .message-content
+      background-color: $insideMsgBkgrnd
+
+
+.form
+  height: 100%
+  width: 100%
+  padding: 0 25px
+  max-width: $containerWidth
+  margin: 0 auto
+  position: relative
+  box-sizing: border-box
+  &-container
+    position: absolute
+    left: 0
+    bottom: 0
+    height: 50px
+    width: 100%
+    overflow: hidden
+    background: rgba(255,255,255,.15)
+    background-size: cover
+    box-shadow: 0 0 20px 0 rgba(0,0,0,.4)
+  &-input
+    background: none
+    border: none
+    color: $formTextColor
+    height: 100%
+    width: 100%
+    padding-left: 10px
+    padding-right: 88px
+    font-size: 15px
+    font-family: Helvetica, Arial, sans-serif
+    font-weight: 300
+    &:focus
+      outline: none
+  &-btn
+    height: 100%
+    border: none
+    background: none
+    color: $formTextColor
+    padding-left: 20px
+    padding-right: 20px
+    cursor: pointer
+    font-size: 16px
+    font-family: Helvetica, Arial, sans-serif
+    font-weight: 300
+    transition: background-color .3s ease-out
+    position: absolute
+    top: 0
+    right: 25px
+    &:hover
+      background: rgba(255,255,255,.1)
+    &:focus
+      outline: none

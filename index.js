@@ -1,4 +1,5 @@
-var app = require('express')();
+var express = require('express'),
+    app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
@@ -8,17 +9,18 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
   console.log('a user connected');
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
 
   socket.broadcast.emit('hi');
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
   });
-
-  socket.on('disconnect', function(){
-   console.log('user disconnected');
- });
 });
 
+app.use('/app', express.static(__dirname + '/app'));
+app.use('/assets', express.static(__dirname + '/assets'));
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
