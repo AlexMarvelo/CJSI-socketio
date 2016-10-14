@@ -52,8 +52,7 @@ $(document).ready(function() {
 
     socket.on('chat message', msg => {
       if (msg.user.id == currentUser.id) return;
-      messageList.append(getMessageBlock(msg));
-      scrollToListBttom();
+      addMsg(msg);
     });
 
     socket.on('chat history', msgs => {
@@ -70,6 +69,10 @@ $(document).ready(function() {
 
   // -----------------------------------------------------
 
+  function addMsg(msg) {
+    messageList.append(getMessageBlock(msg));
+    scrollToListBttom();
+  }
 
   function getMessageBlock(msg) {
     if (!msg.text.length) return;
@@ -98,6 +101,7 @@ $(document).ready(function() {
 
   function addInfoMsg(infoMsg) {
     messageList.append(getInfoMessageBlock(infoMsg));
+    scrollToListBttom();
   }
 
   function getInfoMessageBlock(infoMsg) {
