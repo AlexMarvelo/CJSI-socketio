@@ -7,9 +7,12 @@ $(document).ready(function() {
   const entryInput = entryForm.find('.entry-input')[0];
   const messagesContainer = $('.messages-container');
   const messageList = $('#messages-list');
+  const sidebar = $('.sidebar');
+  const sidebarList = sidebar.find('.sidebar-list');
   entryInput.focus();
 
   let currentUser;
+  let onlineList = [];
 
   entryForm.submit((event) => {
     event.preventDefault();
@@ -37,17 +40,25 @@ $(document).ready(function() {
     input.value = '';
   });
 
-  socket.on('user logined', user => {
+  sidebar.find('.sidebar-toggle').click(() => {
+    sidebar.toggleClass('opened');
+  });
+
+  socket.on('user logined', (user, onlineUsers) => {
     currentUser = user;
+    onlineList = onlineUsers;
+    updateOnlineList();
 
     socket.on('user joineduser', user => {
-      if (user.id == currentUser.id) return;
+      if (currentUser && user.id == currentUser.id) return;
       addInfoMsg(`${user.name} joined this chat`);
+      addToOnlineList(user);
     });
 
     socket.on('user leaveuser', user => {
-      if (user.id == currentUser.id) return;
+      if (currentUser && user.id == currentUser.id) return;
       addInfoMsg(`${user.name} left this chat`);
+      removeFromOnlineList(user);
     });
 
     socket.on('chat message', msg => {
@@ -68,6 +79,32 @@ $(document).ready(function() {
 
 
   // -----------------------------------------------------
+
+
+  function addToOnlineList(user) {
+    onlineList.push(user);
+    updateOnlineList();
+  }
+
+  function removeFromOnlineList(user) {
+    let index;
+    onlineList.find((u, i) => {
+      if (u.id == user.id) {
+        index = i;
+        return true;
+      }
+    });
+    if (index) onlineList.splice(index, 1);
+    updateOnlineList();
+  }
+
+  function updateOnlineList() {
+    sidebarList.empty();
+    onlineList.forEach(user => {
+      if (user.id == currentUser.id) return;
+      sidebarList.append(`<li>${user.name}</li>`);
+    });
+  }
 
   function addMsg(msg) {
     messageList.append(getMessageBlock(msg));

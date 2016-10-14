@@ -30,7 +30,7 @@ io.on('connection', socket => {
       return;
     }
     currnentUser = loginUser(user);
-    socket.emit('user logined', currnentUser);
+    socket.emit('user logined', currnentUser, getCurrentlyLogined());
     socket.emit('chat history', msgs);
     io.emit('user joineduser', currnentUser);
   });
