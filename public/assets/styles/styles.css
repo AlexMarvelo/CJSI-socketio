@@ -45,7 +45,7 @@ ul {
   margin: 0 auto;
   height: 100%;
   overflow-x: hidden;
-  overflow-y: scroll; }
+  overflow-y: auto; }
 
 .message {
   position: relative;
@@ -105,8 +105,7 @@ ul {
     bottom: 0;
     height: 50px;
     width: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    overflow: hidden;
     background: rgba(255, 255, 255, 0.15);
     background-size: cover;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
@@ -187,7 +186,7 @@ ul {
     padding: 25px 25px 0;
     height: 100%;
     overflow-x: hidden;
-    overflow-y: scroll; }
+    overflow-y: auto; }
   .sidebar-title {
     font-size: 16px;
     margin-bottom: 7px;
