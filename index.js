@@ -19,8 +19,9 @@ const msgs = [];
 io.on('connection', socket => {
   const socketID = socket.id;
   // console.log(`- unknown client connected. Socket ID: ${socketID}`);
-  let currnentUser = {};
+  let currnentUser;
   socket.on('disconnect', () => {
+    if (!currnentUser) return;
     io.emit('user leaveuser', currnentUser);
     disconnectUser(currnentUser, socketID);
   });
