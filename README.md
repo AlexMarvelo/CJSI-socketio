@@ -21,4 +21,4 @@ npm start
 ```
 Then open *http://localhost:5000/* file in your browser
 
-![Aplication screenshot](http://heyalex.xyz/static/img/screen-socketio-chat.png)
+![Aplication screenshot](http://heyalex.xyz/static/img/screenshot-socketio-chat.png)
