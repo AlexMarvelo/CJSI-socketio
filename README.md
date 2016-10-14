@@ -2,6 +2,7 @@
 Hometask for Ciklum JS Internship Lesson 10
 
 This aplication - simple multiuser chat with login-only authorisation
+
 Aplication deployed [here](https://open-socket-chat.herokuapp.com/) on Heroku server
 
 ---
