@@ -1,6 +1,8 @@
 # CJSI-socketio
 Hometask for Ciklum JS Internship Lesson 10
 
+This aplication - simple multiuser chat with login-only authorisation
+
 ---
 
 ##### List of used technologies:
@@ -17,4 +19,6 @@ cd CJSI-socketio
 npm i
 npm start
 ```
-Then open *http://localhost:3000/* file in your browser
+Then open *http://localhost:5000/* file in your browser
+
+![Aplication screenshot](http://heyalex.xyz/static/img/screen-socketio-chat.png)
