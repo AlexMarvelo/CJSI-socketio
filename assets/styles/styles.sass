@@ -146,6 +146,8 @@ ul
   &-container
     text-align: center
     color: #dce8ff
+    overflow: hidden
+    margin-bottom: 20px
   &-subtitle
     margin: 5px 0
   &-input
@@ -157,3 +159,15 @@ ul
     text-align: left
     &:focus
       outline: none
+  &-msg
+    position: relative
+    &::before, &::after
+      content: ''
+      position: absolute
+      height: 8px
+      border-bottom: 1px dashed $textColor
+      width: 200px
+    &::before
+      left: -205px
+    &::after
+      right: -205px

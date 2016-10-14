@@ -32,33 +32,38 @@ $(document).ready(function() {
       time: new Date()
     };
     messageList.append(getMessageBlock(msg));
-    messagesContainer.animate({
-      scrollTop: messagesContainer[0].scrollHeight
-    }, 'slow');
+    scrollToListBttom();
     socket.emit('chat message', msg);
     input.value = '';
   });
 
   socket.on('user logined', user => {
     currentUser = user;
+
+    socket.on('user joineduser', user => {
+      if (user.id == currentUser.id) return;
+      addInfoMsg(`${user.name} joined chat`);
+    });
+
+    socket.on('chat message', msg => {
+      if (msg.user.id == currentUser.id) return;
+      messageList.append(getMessageBlock(msg));
+      scrollToListBttom();
+    });
+
+    socket.on('chat history', msgs => {
+      if (!currentUser) return;
+      msgs.forEach(msg => messageList.append(getMessageBlock(msg)));
+      scrollToListBttom();
+    });
   });
 
   socket.on('user loginunavailable', () => {
-    console.warn('Login anavailable');
+    addInfoMsg('Room is full (limit of 5 users). Entry unavailable');
   });
 
-  socket.on('chat message', msg => {
-    if (msg.user.id == currentUser.id) return;
-    messageList.append(getMessageBlock(msg));
-    messagesContainer.animate({
-      scrollTop: messagesContainer[0].scrollHeight
-    }, 'slow');
-  });
 
-  socket.on('chat history', msgs => {
-    msgs.forEach(msg => messageList.append(getMessageBlock(msg)));
-  });
-
+  // -----------------------------------------------------
 
 
   function getMessageBlock(msg) {
@@ -84,5 +89,23 @@ $(document).ready(function() {
         <span class="message-content-time">${getTimeString(msg.time)}</span>
       </div>
     </li>`;
+  }
+
+  function addInfoMsg(infoMsg) {
+    messageList.append(getInfoMessageBlock(infoMsg));
+  }
+
+  function getInfoMessageBlock(infoMsg) {
+    if (!infoMsg.length) return;
+    return `
+    <div class="entry-container">
+      <span class="entry-msg">${infoMsg}</span>
+    </div>`;
+  }
+
+  function scrollToListBttom() {
+    messagesContainer.animate({
+      scrollTop: messagesContainer[0].scrollHeight
+    }, 'slow');
   }
 });

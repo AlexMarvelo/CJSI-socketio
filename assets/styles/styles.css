@@ -142,7 +142,9 @@ ul {
   margin-bottom: 20px; }
 .entry-container {
   text-align: center;
-  color: #dce8ff; }
+  color: #dce8ff;
+  overflow: hidden;
+  margin-bottom: 20px; }
 .entry-subtitle {
   margin: 5px 0; }
 .entry-input {
@@ -154,5 +156,17 @@ ul {
   text-align: left; }
   .entry-input:focus {
     outline: none; }
+.entry-msg {
+  position: relative; }
+  .entry-msg::before, .entry-msg::after {
+    content: "";
+    position: absolute;
+    height: 8px;
+    border-bottom: 1px dashed #dce8ff;
+    width: 200px; }
+  .entry-msg::before {
+    left: -205px; }
+  .entry-msg::after {
+    right: -205px; }
 
 /*# sourceMappingURL=styles.css.map */

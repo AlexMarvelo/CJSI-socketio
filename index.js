@@ -12,8 +12,8 @@ app.get('/', (req, res) => {
 
 io.on('connection', socket => {
   const socketID = socket.id;
-  console.log(`- unknown client connected. Socket ID: ${socketID}`);
-  let currnentUser = {};
+  // console.log(`- unknown client connected. Socket ID: ${socketID}`);
+  let currnentUser;
   socket.on('disconnect', () => {
     disconnectUser(currnentUser, socketID);
   });
@@ -28,9 +28,10 @@ io.on('connection', socket => {
       socket.emit('user loginunavailable');
       return;
     }
-    user = loginUser(user);
-    socket.emit('user logined', user);
+    currnentUser = loginUser(user);
+    socket.emit('user logined', currnentUser);
     socket.emit('chat history', msgs);
+    io.emit('user joineduser', currnentUser);
   });
 });
 
@@ -59,9 +60,8 @@ function loginUser(user) {
 }
 
 function disconnectUser(user, socketID) {
-  user = users.find(u => u.id == user.id);
   if (!user) {
-    console.log(`- unknown client disconnected. Socket ID: ${socketID}`);
+    // console.log(`- unknown client disconnected. Socket ID: ${socketID}`);
     return;
   }
   users.find(u => u.id == user.id).logined = false;
