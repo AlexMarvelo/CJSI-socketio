@@ -1,5 +1,6 @@
 'use strict';
 
+var $ = require('jquery');
 var socket = io();
 
 $(document).ready(function() {
