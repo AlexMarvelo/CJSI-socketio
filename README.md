@@ -9,6 +9,7 @@ This aplication - simple multiuser chat with login-only authorisation
 - socket.io
 - express server
 - jquery
+- sass
 
 ---
 
