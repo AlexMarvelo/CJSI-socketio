@@ -1,5 +1,3 @@
-'use strict';
-
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
@@ -8,8 +6,8 @@ const io = require('socket.io')(http);
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
-app.use(__dirname + '/app', express.static(__dirname + '/app'));
-app.use(__dirname + '/assets', express.static(__dirname + '/assets'));
+app.use('app', express.static(__dirname + '/app'));
+app.use('assets', express.static(__dirname + '/assets'));
 http.listen(process.env.PORT || 5000, () => {
   console.log(`listening on:${process.env.PORT || 3000}`);
 });
