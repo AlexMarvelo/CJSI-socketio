@@ -42,7 +42,12 @@ $(document).ready(function() {
 
     socket.on('user joineduser', user => {
       if (user.id == currentUser.id) return;
-      addInfoMsg(`${user.name} joined chat`);
+      addInfoMsg(`${user.name} joined this chat`);
+    });
+
+    socket.on('user leaveuser', user => {
+      if (user.id == currentUser.id) return;
+      addInfoMsg(`${user.name} left this chat`);
     });
 
     socket.on('chat message', msg => {

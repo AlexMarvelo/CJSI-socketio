@@ -15,6 +15,7 @@ io.on('connection', socket => {
   // console.log(`- unknown client connected. Socket ID: ${socketID}`);
   let currnentUser;
   socket.on('disconnect', () => {
+    io.emit('user leaveuser', currnentUser);
     disconnectUser(currnentUser, socketID);
   });
 
