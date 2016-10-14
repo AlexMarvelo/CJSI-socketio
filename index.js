@@ -13,18 +13,24 @@ app.get('/', (req, res) => {
 io.on('connection', socket => {
   const socketID = socket.id;
   console.log(`- unknown client connected. Socket ID: ${socketID}`);
-  let currnentUser;
+  let currnentUser = {};
   socket.on('disconnect', () => {
     disconnectUser(currnentUser, socketID);
   });
 
   socket.on('chat message', msg => {
+    msgs.push(msg);
     io.emit('chat message', msg);
   });
 
   socket.on('user login', user => {
+    if (getCurrentlyLogined().length >= 5) {
+      socket.emit('user loginunavailable');
+      return;
+    }
     user = loginUser(user);
     socket.emit('user logined', user);
+    socket.emit('chat history', msgs);
   });
 });
 
@@ -68,4 +74,8 @@ function getUniqUserID() {
     clientIDTemp = parseInt((Math.random()*1000).toString(), 16);
   }
   return clientIDTemp;
+}
+
+function getCurrentlyLogined() {
+  return users.filter(u => u.logined);
 }

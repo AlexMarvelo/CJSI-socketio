@@ -48,7 +48,8 @@ ul {
 
 .message {
   position: relative;
-  margin-bottom: 15px; }
+  margin-bottom: 15px;
+  min-height: 50px; }
   .message-imgContainer {
     width: 50px;
     height: 50px;
@@ -66,11 +67,11 @@ ul {
     overflow: hidden;
     position: relative; }
     .message-content-user {
-      font-size: 16px; }
+      font-size: 16px;
+      margin-bottom: 6px; }
     .message-content-text {
       margin: 0;
-      line-height: 1.4;
-      margin-top: 6px; }
+      line-height: 1.4; }
     .message-content-time {
       font-size: 12px;
       position: absolute;

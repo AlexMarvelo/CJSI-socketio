@@ -5,12 +5,13 @@ $(document).ready(function() {
   const input = form.find('.form-input')[0];
   const entryForm = $('#entry-form');
   const entryInput = entryForm.find('.entry-input')[0];
+  const messagesContainer = $('.messages-container');
   const messageList = $('#messages-list');
   entryInput.focus();
 
   let currentUser;
 
-  $(entryForm).submit((event) => {
+  entryForm.submit((event) => {
     event.preventDefault();
     if (!entryInput.value.length) return;
     socket.emit('user login', {
@@ -19,7 +20,7 @@ $(document).ready(function() {
     entryForm.remove();
   });
 
-  $(form).submit((event) => {
+  form.submit((event) => {
     event.preventDefault();
     if (!currentUser) {
       input.value = '';
@@ -27,27 +28,43 @@ $(document).ready(function() {
     }
     let msg = {
       text: input.value,
-      user: currentUser.name,
+      user: currentUser,
       time: new Date()
     };
     messageList.append(getMessageBlock(msg));
+    messagesContainer.animate({
+      scrollTop: messagesContainer[0].scrollHeight
+    }, 'slow');
     socket.emit('chat message', msg);
     input.value = '';
   });
 
   socket.on('user logined', user => {
     currentUser = user;
-    console.log(currentUser);
+  });
+
+  socket.on('user loginunavailable', () => {
+    console.warn('Login anavailable');
   });
 
   socket.on('chat message', msg => {
-    if (msg.user == currentUser.name) return;
+    if (msg.user.id == currentUser.id) return;
     messageList.append(getMessageBlock(msg));
+    messagesContainer.animate({
+      scrollTop: messagesContainer[0].scrollHeight
+    }, 'slow');
   });
 
+  socket.on('chat history', msgs => {
+    msgs.forEach(msg => messageList.append(getMessageBlock(msg)));
+  });
+
+
+
   function getMessageBlock(msg) {
-    console.dir(msg);
-    var getTimeString = function(time) {
+    if (!msg.text.length) return;
+    let isMy = msg.user.id == currentUser.id;
+    let getTimeString = function(time) {
       time = new Date(time);
       const now = new Date();
       const isToday = time.getDate() == now.getDate() && time.getMonth() == now.getMonth();
@@ -55,13 +72,14 @@ $(document).ready(function() {
       const timeStr = `${time.getHours() < 10 ? 0 : ''}${time.getHours()}:${time.getMinutes() < 10 ? 0 : ''}${time.getMinutes()}`;
       return `${dateStr} ${timeStr}`;
     };
+    let userRow = `<span class="message-content-user">${msg.user.name}</span>`;
     return `
-    <li class="message message--${msg.user == currentUser.name ? 'inside' : 'outside'}">
+    <li class="message message--${isMy ? 'inside' : 'outside'}">
       <div class="message-imgContainer">
-        <img src="assets/img/user-avatar.png" alt="${msg.user}" />
+        <img src="assets/img/user-avatar.png" alt="${msg.user.name}" />
       </div>
       <div class="message-content">
-        <span class="message-content-user">${msg.user}</span>
+        ${isMy ? '' : userRow }
         <p class="message-content-text">${msg.text}</p>
         <span class="message-content-time">${getTimeString(msg.time)}</span>
       </div>
