@@ -12,9 +12,9 @@ $(document).ready(function() {
 
   $(entryForm).submit((event) => {
     event.preventDefault();
+    if (!entryInput.value.length) return;
     socket.emit('user login', {
-      name: entryInput.value,
-      time: new Date()
+      name: entryInput.value
     });
     entryForm.remove();
   });
