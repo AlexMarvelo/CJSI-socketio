@@ -8,6 +8,11 @@ body {
   font-family: Helvetica, arial, sans-serif;
   font-weight: 300; }
 
+input {
+  font-size: 15px;
+  font-family: Helvetica, arial, sans-serif;
+  font-weight: 300; }
+
 ul {
   margin: 0;
   padding: 0;
@@ -56,15 +61,21 @@ ul {
   .message-content {
     border: 1px solid #dce8ff;
     border-radius: 4px;
-    padding: 10px;
+    padding: 10px 10px 27px;
     color: #dce8ff;
-    overflow: hidden; }
+    overflow: hidden;
+    position: relative; }
     .message-content-user {
       font-size: 16px; }
     .message-content-text {
       margin: 0;
       line-height: 1.4;
       margin-top: 6px; }
+    .message-content-time {
+      font-size: 12px;
+      position: absolute;
+      right: 10px;
+      bottom: 7px; }
   .message--outside {
     padding-left: 75px;
     padding-right: 20px; }
@@ -103,10 +114,7 @@ ul {
     height: 100%;
     width: 100%;
     padding-left: 10px;
-    padding-right: 88px;
-    font-size: 15px;
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: 300; }
+    padding-right: 88px; }
     .form-input:focus {
       outline: none; }
   .form-btn {
@@ -128,5 +136,22 @@ ul {
       background: rgba(255, 255, 255, 0.1); }
     .form-btn:focus {
       outline: none; }
+
+.entry-form {
+  margin-bottom: 20px; }
+.entry-container {
+  text-align: center;
+  color: #dce8ff; }
+.entry-subtitle {
+  margin: 5px 0; }
+.entry-input {
+  border: none;
+  background: none;
+  color: #dce8ff;
+  padding: 0 5px;
+  width: 100px;
+  text-align: left; }
+  .entry-input:focus {
+    outline: none; }
 
 /*# sourceMappingURL=styles.css.map */

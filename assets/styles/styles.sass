@@ -12,6 +12,10 @@ body
   font-size: 15px
   font-family: Helvetica, arial, sans-serif
   font-weight: 300
+input
+  font-size: 15px
+  font-family: Helvetica, arial, sans-serif
+  font-weight: 300
 ul
   margin: 0
   padding: 0
@@ -58,15 +62,21 @@ ul
   &-content
     border: 1px solid $borderColor
     border-radius: 4px
-    padding: 10px
+    padding: 10px 10px 27px
     color: $textColor
     overflow: hidden
+    position: relative
     &-user
       font-size: 16px
     &-text
       margin: 0
       line-height: 1.4
       margin-top: 6px
+    &-time
+      font-size: 12px
+      position: absolute
+      right: 10px
+      bottom: 7px
   &--outside
     padding-left: 75px
     padding-right: 20px
@@ -107,9 +117,6 @@ ul
     width: 100%
     padding-left: 10px
     padding-right: 88px
-    font-size: 15px
-    font-family: Helvetica, Arial, sans-serif
-    font-weight: 300
     &:focus
       outline: none
   &-btn
@@ -129,5 +136,23 @@ ul
     right: 25px
     &:hover
       background: rgba(255,255,255,.1)
+    &:focus
+      outline: none
+
+.entry
+  &-form
+    margin-bottom: 20px
+  &-container
+    text-align: center
+    color: #dce8ff
+  &-subtitle
+    margin: 5px 0
+  &-input
+    border: none
+    background: none
+    color: $textColor
+    padding: 0 5px
+    width: 100px
+    text-align: left
     &:focus
       outline: none
