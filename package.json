@@ -12,8 +12,10 @@
   },
   "scripts": {
     "start": "node index.js",
-    "bundle": "webpack app/app.js public/app.bundle.js",
-    "styles": "sass --watch public/assets/styles/styles.sass:public/assets/styles/styles.css"
+    "dev:css": "sass --watch public/assets/styles/styles.sass:public/assets/styles/styles.css",
+    "build": "npm-run-all -p build:js build:css",
+    "build:js": "webpack app/app.js --output-path public --output-filename app.bundle.js --mode production --progress --colors",
+    "build:css": "sass public/assets/styles/styles.sass:public/assets/styles/styles.css"
   },
   "author": "Alexey <mironenkoalexey@gmail.com>",
   "license": "ISC",
@@ -23,6 +25,9 @@
     "socket.io": "^1.5.0"
   },
   "devDependencies": {
-    "eslint": "^3.7.1"
+    "eslint": "^3.7.1",
+    "npm-run-all": "^4.1.2",
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.10"
   }
 }

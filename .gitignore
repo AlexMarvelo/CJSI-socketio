@@ -2,4 +2,7 @@ node_modules
 .DS_Store
 npm-debug.log
 .sass-cache
-assets/styles/.sass-cache
+
+*.bundle.js
+*.css
+*.css.map
