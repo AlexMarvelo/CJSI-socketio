@@ -8,9 +8,12 @@ const io = require('socket.io')(http);
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
+
 app.use(express.static(__dirname + '/public'));
-http.listen(process.env.PORT || 5000, () => {
-  console.log(`listening on:${process.env.PORT || 5000}`);
+
+const port = process.env.PORT || 3000;
+http.listen(port, () => {
+  console.log(`listening on:${port}`);
 });
 
 const users = [];
